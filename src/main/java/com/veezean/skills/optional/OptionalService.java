@@ -92,6 +92,46 @@ public class OptionalService {
         return null;
     }
 
+    /**
+     * 演示多级调用的时候可能的空指针问题
+     */
+    public void getCompanyFromEmployee() {
+        Employee employee = getEmployee();
+        Company company = employee.getTeam().getDepartment().getCompany();
+        System.out.println(company);
+    }
+
+    /**
+     * 演示多级调用的时候空指针异常保护
+     */
+    public void getCompanyFromEmployee2() {
+        Employee employee = getEmployee();
+        if (employee == null) {
+            // do something here...
+            return;
+        }
+        Team team = employee.getTeam();
+        if (team == null) {
+            // do something here...
+            return;
+        }
+
+        Department department = team.getDepartment();
+        if (department == null) {
+            // do something here...
+            return;
+        }
+        Company company = department.getCompany();
+        System.out.println(company);
+    }
+
+    private Employee getEmployee() {
+        Employee employee = new Employee();
+        employee.setEmployeeName("JiaGouWuDao");
+        employee.setTeam(new Team("DevTeam4"));
+        return employee;
+    }
+
     public static void main(String[] args) {
         OptionalService service = new OptionalService();
         service.testCreateOptional();
