@@ -1,5 +1,7 @@
 package com.veezean.skills.stream;
 
+import lombok.Data;
+
 /**
  * <类功能简要描述>
  *
