@@ -1,5 +1,8 @@
 package com.veezean.skills.optional;
 
+import com.veezean.skills.util.StringUtils;
+
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 /**
@@ -132,6 +135,79 @@ public class OptionalService {
         return employee;
     }
 
+    public void testMapAndFlatMap() {
+        Optional<User> userOptional = getUser();
+        Optional<Employee> employeeOptional = userOptional.map(user -> {
+            Employee employee = new Employee();
+            employee.setEmployeeName(user.getUserName());
+            // map与flatMap的区别点：此处return的是具体对象类型
+            return employee;
+        });
+        System.out.println(employeeOptional);
+
+        Optional<Employee> employeeOptional2 = userOptional.flatMap(user -> {
+            Employee employee = new Employee();
+            employee.setEmployeeName(user.getUserName());
+            // map与flatMap的区别点：此处return的是具体对象的Optional封装类型
+            return Optional.of(employee);
+        });
+        System.out.println(employeeOptional2);
+    }
+
+    private Optional<User> getUser() {
+        User user = new User();
+        user.setId("111");
+        user.setUserName("JiaGouWuDao");
+        return Optional.of(user);
+    }
+
+    public void getCompanyFromEmployeeTest() {
+        Employee employeeDetail = getEmployee();
+        String companyName = Optional.ofNullable(employeeDetail)
+                .map(employee -> employee.getTeam())
+                .map(team -> team.getDepartment())
+                .map(department -> department.getCompany())
+                .map(company -> company.getCompanyName())
+                .orElse("No Company");
+        System.out.println(companyName);
+    }
+
+    public String getClientIp(HttpServletRequest request) {
+        String clientIp = request.getHeader("X-Forwarded-For");
+        if (!StringUtils.isEmpty(clientIp)) {
+            return clientIp;
+        }
+        clientIp = request.getHeader("X-Real-IP");
+        return clientIp;
+    }
+
+    public String getClientIp2(HttpServletRequest request) {
+        String clientIp = request.getHeader("X-Forwarded-For");
+        return Optional.ofNullable(clientIp).orElseGet(() -> request.getHeader("X-Real-IP"));
+    }
+
+//    public Optional<FileInfo> queryOssFileInfo(String fileId) {
+//        FileEntity entity = fileRepository.findByIdAndStatus(fileId, 0);
+//        if (entity != null) {
+//            return Optional.ofNullable(new FileInfo(entity.getName(), entity.getFilePath(), false));
+//        }
+//        FileHistoryEntity hisEntity = fileHisRepository.findByIdAndStatus(fileId, 0);
+//        if (hisEntity != null) {
+//            return Optional.ofNullable(new FileInfo(hisEntity.getName(), hisEntity.getFilePath(), true));
+//        }
+//        return Optional.empty();
+//    }
+
+
+    public Team getTeamInfo() throws TestException {
+        Employee employee = getEmployee();
+        Team team = employee.getTeam();
+        if (team == null) {
+            throw new TestException("team is missing");
+        }
+        return team;
+    }
+
     public static void main(String[] args) {
         OptionalService service = new OptionalService();
         service.testCreateOptional();
@@ -140,5 +216,7 @@ public class OptionalService {
         service.testCallOptional2();
         service.testNullReturn();
         service.testNullReturn2();
+        service.testMapAndFlatMap();
+        service.getCompanyFromEmployeeTest();
     }
 }
