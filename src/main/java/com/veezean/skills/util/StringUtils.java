@@ -1,7 +1,7 @@
 package com.veezean.skills.util;
 
 /**
- * <类功能简要描述>
+ * 字符串操作工具类
  *
  * @author 架构悟道
  * @since 2022/7/14

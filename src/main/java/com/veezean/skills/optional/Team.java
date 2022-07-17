@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * <类功能简要描述>
+ * 团队信息
  *
  * @author 架构悟道
  * @since 2022/7/13
