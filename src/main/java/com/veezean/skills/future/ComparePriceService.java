@@ -3,10 +3,7 @@ package com.veezean.skills.future;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.stream.Stream;
 
 /**
@@ -48,6 +45,12 @@ public class ComparePriceService {
                 .get();
     }
 
+    /**
+     * 演示传统方式通过线程池来增加并发
+     *
+     * @param product
+     * @return
+     */
     public PriceResult getCheapestPlatAndPrice2(String product) {
         ExecutorService executorService = Executors.newFixedThreadPool(5);
 
@@ -90,15 +93,43 @@ public class ComparePriceService {
         }
 
         return results.stream()
-        .min(Comparator.comparingInt(PriceResult::getRealPrice))
+                .min(Comparator.comparingInt(PriceResult::getRealPrice))
                 .get();
 
+    }
+
+    public PriceResult getCheapestPlatAndPrice3(String product) {
+        CompletableFuture<PriceResult> mouBao =
+                CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouXiXiPrice(product))
+                        .thenCombine(CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouXiXiDiscounts(product)),
+                                this::computeRealPrice);
+
+        CompletableFuture<PriceResult> mouDong =
+                CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouXiXiPrice(product))
+                        .thenCombine(CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouXiXiDiscounts(product)),
+                                this::computeRealPrice);
+
+        CompletableFuture<PriceResult> mouXiXi =
+                CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouXiXiPrice(product))
+                        .thenCombine(CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouXiXiDiscounts(product)),
+                                this::computeRealPrice);
+
+        return Stream.of(mouBao, mouDong, mouXiXi)
+                .map(CompletableFuture::join)
+                .sorted(Comparator.comparingInt(PriceResult::getRealPrice))
+                .findFirst()
+                .get();
+    }
+
+    private PriceResult computeRealPrice(PriceResult priceResult, int disCounts) {
+        priceResult.setRealPrice(priceResult.getPrice() - disCounts);
+        return priceResult;
     }
 
     public static void main(String[] args) {
         ComparePriceService service = new ComparePriceService();
         long startTime = System.currentTimeMillis();
-        PriceResult result = service.getCheapestPlatAndPrice2("Huawei P50");
+        PriceResult result = service.getCheapestPlatAndPrice("Huawei P50");
         System.out.println("获取最优价格信息：" + result);
         System.out.println("-----执行耗时： " + (System.currentTimeMillis() - startTime) + "ms  ------");
     }
