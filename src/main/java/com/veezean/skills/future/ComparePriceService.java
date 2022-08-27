@@ -108,18 +108,34 @@ public class ComparePriceService {
      * @return
      */
     public PriceResult getCheapestPlatAndPrice4(String product) {
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
+        // 构造自定义线程池
+        ExecutorService executor = Executors.newFixedThreadPool(5);
 
         return
                 CompletableFuture.supplyAsync(
                         () -> HttpRequestMock.getMouXiXiPrice(product),
-                        executorService)
-                        .thenCombineAsync(
-                                CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouXiXiDiscounts(product)),
-                                this::computeRealPrice,
-                                executorService)
-                        .join();
+                        executor
+                ).thenCombineAsync(
+                        CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouXiXiDiscounts(product)),
+                        this::computeRealPrice,
+                        executor
+                ).join();
+    }
 
+    /**
+     * 演示thenCombine与thenCombineAsync区别
+     *
+     * @param product
+     * @return
+     */
+    public PriceResult getCheapestPlatAndPrice5(String product) {
+        return
+                CompletableFuture.supplyAsync(
+                        () -> HttpRequestMock.getMouXiXiPrice(product)
+                ).thenCombine(
+                        CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouXiXiDiscounts(product)),
+                        this::computeRealPrice
+                ).join();
     }
 
     /**
@@ -139,6 +155,47 @@ public class ComparePriceService {
                 .sorted(Comparator.comparingInt(PriceResult::getRealPrice))
                 .findFirst()
                 .get();
+    }
+
+    /**
+     * 演示两个map写法等同于一个map写法
+     *
+     * @param products
+     * @return
+     */
+    public PriceResult comparePriceInOnePlat1(List<String> products) {
+        return products.stream()
+                .map(product ->
+                        CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouBaoPrice(product))
+                                .thenCombine(
+                                        CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouBaoDiscounts(product)),
+                                        this::computeRealPrice)
+                                .join())
+                .sorted(Comparator.comparingInt(PriceResult::getRealPrice))
+                .findFirst()
+                .get();
+    }
+
+    public void testCreateFuture(String product) {
+        // supplyAsync， 执行逻辑有返回值PriceResult
+        CompletableFuture<PriceResult> supplyAsyncResult =
+                CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouBaoPrice(product));
+        // runAsync, 执行逻辑没有返回值
+        CompletableFuture<Void> runAsyncResult =
+                CompletableFuture.runAsync(() -> System.out.println(product));
+    }
+
+    public void testStepByStep(CompletableFuture<PriceResult> supplyAsyncResult) {
+
+        CompletableFuture<Integer> applyResult =
+                supplyAsyncResult.thenApply(PriceResult::getRealPrice);
+        CompletableFuture<Integer> composeResult =
+                supplyAsyncResult.thenCompose(priceResult -> CompletableFuture.supplyAsync(priceResult::getPrice));
+        CompletableFuture<Void> voidCompletableFuture =
+                supplyAsyncResult.thenAccept(priceResult -> System.out.println(priceResult.getPrice()));
+        supplyAsyncResult.thenRun(() -> {
+        });
+
     }
 
     /**
@@ -170,15 +227,60 @@ public class ComparePriceService {
         return priceResult;
     }
 
+//    public PriceResult testThenApply(String product) {
+//        // 获取并计算某宝的最终价格
+//        CompletableFuture<PriceResult> mouBao =
+//                CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouBaoPrice(product))
+//                        .thenCombine(CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouBaoDiscounts(product)),
+//                                this::computeRealPrice);
+//        // 获取并计算某宝的最终价格
+//        CompletableFuture<PriceResult> mouDong =
+//                CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouDongPrice(product))
+//                        .thenCombine(CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouDongDiscounts
+//                        (product)),
+//                                this::computeRealPrice);
+//
+//
+//    }
+
+    public void testExceptionHandle() {
+        CompletableFuture.supplyAsync(() -> {
+            throw new RuntimeException("supplyAsync excetion occurred...");
+        }).handle((obj, e) -> {
+            if (e != null) {
+                System.out.println("thenApply executed, exception occurred...");
+            }
+            return obj;
+        }).join();
+    }
+
+    public void testCombineHandle() {
+        System.out.println("开始执行");
+        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> getResult("future1"));
+        CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> "future2");
+        CompletableFuture.allOf(future1, future2).join();
+        System.out.println("执行完成");
+    }
+
+    private String getResult(String result) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         ComparePriceService service = new ComparePriceService();
-//        long startTime = System.currentTimeMillis();
-//        PriceResult result = service.getCheapestPlatAndPrice4("Iphone13");
-//        System.out.println("获取最优价格信息：" + result);
-
         long startTime = System.currentTimeMillis();
-        PriceResult result = service.comparePriceInOnePlat2(Arrays.asList("Iphone13黑色", "Iphone13白色", "Iphone13红色"));
-        System.out.println("获取最优价格信息：" + result);
+//        PriceResult result = service.getCheapestPlatAndPrice5("Iphone13");
+//        System.out.println("获取最优价格信息：" + result);
+        service.testCombineHandle();
+
+//        long startTime = System.currentTimeMillis();
+//        PriceResult result = service.comparePriceInOnePlat2(Arrays.asList("Iphone13黑色", "Iphone13白色", "Iphone13红色"));
+//        System.out.println("获取最优价格信息：" + result);
 
         System.out.println("-----执行耗时： " + (System.currentTimeMillis() - startTime) + "ms  ------");
     }
