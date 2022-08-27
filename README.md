@@ -17,37 +17,47 @@ JAVA细节、JAVA使用细节剖析相关文档汇总整理，以及相关文档
 
 ### JAVA精讲系列
 
-- [当JAVA注解、AOP、SpEL相遇，更多可能变为了现实 ](https://juejin.cn/post/7110920874412228639)
+- 🔥[当JAVA注解、AOP、SpEL相遇，更多可能变为了现实 ](https://juejin.cn/post/7110920874412228639)
 
-- [为什么不建议使用自定义Object作为HashMap的key？](https://juejin.cn/post/7114555022599258119)
+- 🔥[为什么不建议使用自定义Object作为HashMap的key？](https://juejin.cn/post/7114555022599258119)
 
-- [避坑手册 | JAVA编码中容易踩坑的十大陷阱](https://juejin.cn/post/7114937973916827679)
+- 🔥[避坑手册 | JAVA编码中容易踩坑的十大陷阱](https://juejin.cn/post/7114937973916827679)
 
-- [JAVA中简单的for循环竟有这么多坑，但愿你没踩过](https://juejin.cn/post/7117063647200804877)
+- 🔥[JAVA中简单的for循环竟有这么多坑，但愿你没踩过](https://juejin.cn/post/7117063647200804877)
 
-- [JAVA中计算两个日期时间的差值竟然也有这么多门道](https://juejin.cn/post/7117957247052808199)
+- 🔥[JAVA中计算两个日期时间的差值竟然也有这么多门道](https://juejin.cn/post/7117957247052808199)
 
-- [吃透JAVA的Stream流操作，多年实践总结](https://juejin.cn/post/7118991438448164878)
+- 🔥🔥🔥[吃透JAVA的Stream流操作，多年实践总结](https://juejin.cn/post/7118991438448164878)
 
-- [是时候优雅地和NullPointException说再见了](https://juejin.cn/post/7120131077502402567)
+- 🔥🔥[是时候优雅地和NullPointException说再见了](https://juejin.cn/post/7120131077502402567)
+
+- 🔥🔥🔥[讲透JAVA Stream的collect用法与原理，远比你想象的更强大](https://juejin.cn/post/7121539527151190053)
+
+- 🔥🔥🔥[JAVA基于CompletableFuture的流水线并行处理深度实践，满满干货](https://juejin.cn/post/7124124854747398175)
+
+- 🔥🔥🔥[不堆概念、换个角度聊JAVA多线程并发编程的防护策略](https://juejin.cn/post/7125356800055967752)
+
+- 🔥[聊聊Spring事务控制策略以及@Transactional失效问题避坑](https://juejin.cn/post/7129391912460484616)
+
+- 🔥🔥[用好JAVA中的函数式接口，轻松从通用代码中剥离掉业务定制逻辑](https://juejin.cn/post/7130573318549143588)
 
 ### Spring Data JPA系列
 
-- [Spring Data JPA系列1：JDBC、ORM、JPA、Spring Data JPA，傻傻分不清楚？给你讲透Spring Data JPA ](https://juejin.cn/post/7111551969281949733)
+- 🔥🔥[Spring Data JPA系列1：JDBC、ORM、JPA、Spring Data JPA，傻傻分不清楚？给你讲透Spring Data JPA ](https://juejin.cn/post/7111551969281949733)
 
-- [Spring Data JPA系列2：SpringBoot集成JPA详细教程，快速在项目中熟练使用JPA](https://juejin.cn/post/7112353499056177183)
+- 🔥🔥[Spring Data JPA系列2：SpringBoot集成JPA详细教程，快速在项目中熟练使用JPA](https://juejin.cn/post/7112353499056177183)
 
-- [Spring Data JPA系列3：JPA项目中核心场景与进阶用法介绍](https://juejin.cn/post/7112714785048756232)
+- 🔥🔥[Spring Data JPA系列3：JPA项目中核心场景与进阶用法介绍](https://juejin.cn/post/7112714785048756232)
 
-- [Spring Data JPA系列4——Spring声明式事务处理与多数据源支持](https://juejin.cn/post/7113170430726242317)
+- 🔥[Spring Data JPA系列4——Spring声明式事务处理与多数据源支持](https://juejin.cn/post/7113170430726242317)
 
-- [Spring Data JPA系列5：让IDEA自动帮你写JPA实体定义代码【收官】](https://juejin.cn/post/7114215800008867871)
+- 🔥[Spring Data JPA系列5：让IDEA自动帮你写JPA实体定义代码【收官】](https://juejin.cn/post/7114215800008867871)
 
 ### 系统架构系列
 
-- [搭建一个通用监控告警平台，架构上需要有哪些设计](https://juejin.cn/post/7115324928701759502)
+- 🔥🔥🔥[搭建一个通用监控告警平台，架构上需要有哪些设计](https://juejin.cn/post/7115324928701759502)
 
 ### 问题解决方案系列
 
-- [我是如何将一个老系统的kafka消费者服务的性能提升近百倍的](https://juejin.cn/post/7116337330968854564)
+- 🔥🔥[我是如何将一个老系统的kafka消费者服务的性能提升近百倍的](https://juejin.cn/post/7116337330968854564)
 

@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  */
 public class ComparePriceService {
 
-    private ExecutorService threadPool = Executors.newFixedThreadPool(5);
+    private  ExecutorService threadPool = Executors.newFixedThreadPool(5);
 
     /**
      * 【串行】获取多个平台比价信息得到最低价格平台
@@ -120,6 +120,20 @@ public class ComparePriceService {
                                 executorService)
                         .join();
 
+    }
+
+    public void testGetAndJoin(String product) {
+        // join无需显式try...catch...
+        PriceResult joinResult = CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouXiXiPrice(product))
+                .join();
+
+        try {
+            // get显式try...catch...
+            PriceResult getResult = CompletableFuture.supplyAsync(() -> HttpRequestMock.getMouXiXiPrice(product))
+                    .get(5L, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
