@@ -24,7 +24,6 @@ public class FunctionCodeTest {
         return priceInfo;
     }
 
-
     public static void main(String[] args) {
         FunctionCodeTest functionCodeTest = new FunctionCodeTest();
         int vmCount = 10;
@@ -50,5 +49,4 @@ public class FunctionCodeTest {
             return result;
         });
     }
-
 }
