@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5acfe6ba-4b56-4037-bec9-2578f2c25709" name="Default Changelist" comment="" />
+    <list default="true" id="5acfe6ba-4b56-4037-bec9-2578f2c25709" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/cache/ehcache/EhcacheService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/cache/guava/CacheService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/cache/guava/MyCacheLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/cache/guava/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/cache/guava/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/cache/springcache/SpringCacheTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/future/TestThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/oa/Attendance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/oa/ClockInRecord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/oa/Department.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/oa/LoginReq.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/oa/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/oa/Notice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/oa/Response.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/oa/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/oa/ShortUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/oa/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/oa/UserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/veezean/skills/cache/fwk/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/veezean/skills/cache/fwk/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/com.veezean.kotlin_module" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -20,6 +51,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2EvBQxCl33vEf2xWkH6dG5tYcm6" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -50,6 +84,57 @@
       </list>
     </option>
   </component>
+  <component name="RunManager" selected="Application.EhcacheService">
+    <configuration name="CacheService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.veezean.skills.cache.guava.CacheService" />
+      <module name="com.veezean" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.veezean.skills.cache.guava.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EhcacheService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.veezean.skills.cache.ehcache.EhcacheService" />
+      <module name="com.veezean" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.veezean.skills.cache.ehcache.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.veezean.skills.oa.Main" />
+      <module name="com.veezean" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.veezean.skills.oa.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.EhcacheService" />
+        <item itemvalue="Application.CacheService" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_PROPERTIES,SHOW_FIELDS,SHOW_NON_PUBLIC" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -65,6 +150,13 @@
       <workItem from="1664084563565" duration="294000" />
       <workItem from="1664084871879" duration="152000" />
       <workItem from="1664085037826" duration="1052000" />
+      <workItem from="1666328827330" duration="6987000" />
+      <workItem from="1666848031875" duration="6484000" />
+      <workItem from="1666916373564" duration="1343000" />
+      <workItem from="1667111940304" duration="24822000" />
+      <workItem from="1667311057359" duration="15563000" />
+      <workItem from="1668741076369" duration="4478000" />
+      <workItem from="1672822632967" duration="1520000" />
     </task>
     <servers />
   </component>

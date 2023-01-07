@@ -12,7 +12,7 @@ import javax.cache.spi.CachingProvider;
 public class Main {
 
     public static void main(String[] args) {
-        CachingProvider
+//        CachingProvider
     }
 
 }
