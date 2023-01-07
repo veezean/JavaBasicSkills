@@ -15,6 +15,7 @@ import springfox.documentation.spi.service.ParameterBuilderPlugin;
 import springfox.documentation.spi.service.contexts.ParameterContext;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
